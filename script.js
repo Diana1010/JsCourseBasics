@@ -1,3 +1,8 @@
 'use strict';
 
-alert(1);
+let person ={
+    name: "John",
+    age: 25
+}
+
+console.log(person["name"], person.name);
