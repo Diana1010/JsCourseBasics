@@ -1,25 +1,35 @@
 'use strict';
 
-let person ={
-    name: "John",
-    age: 25
+
+var budget = prompt("Ваш бюджет на месяц?");
+var date = prompt("Введите дату в формате YYYY-MM-DD");
+
+
+var appDate = { 
+    budget: budget,
+    timeData: date,
+    expenses: {} ,
+    optionalExpenses: {} ,
+    income: [45,1],
+    savings: false
+};
+
+for (let i = 0; i<2 ; i++){
+    let consumption = prompt("Введите обязательную статью расходов в этом месяце?");
+    let consumptionCost  = prompt("Во сколько обойдётся?");
+    appDate.expenses[consumption] = consumptionCost;
 }
 
-// console.log(person["name"], person.name);
-// var years = prompt('Сколько вам лет?', 100);
+function sum (object ){
+    var total = 0;
+    
+    for (var property in object) {
+        total += +object[property];
+    }
+    return total;
+}
 
-// alert('Вам ' + years + ' лет!')
+console.log(appDate);
+ var oneDayBudget = (appDate.budget - sum(appDate.expenses) + sum(appDate.income))/30 ;
+ alert("Бюджет на 1 день: " + oneDayBudget );
 
-// var test = prompt("Тест", '');
-
-// var age = prompt('возраст?', 18);
-
-// var message = (age < 3) ? 'Здравствуй, малыш!' :
-//   (age < 18) ? 'Привет!' :
-//   (age < 100) ? 'Здравствуйте!' :
-//   'Какой необычный возраст!';
-
-// alert( message );
-console.log(typeof(null));  //object
-console.log(typeof(45 +"456"));  //string
-console.log(typeof(45 + +"456"));  //number
