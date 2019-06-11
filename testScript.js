@@ -20,6 +20,21 @@ let person ={
 //   'Какой необычный возраст!';
 
 // alert( message );
-console.log(typeof(null));  //object
-console.log(typeof(45 +"456"));  //string
-console.log(typeof(45 + +"456"));  //number
+// console.log(typeof(null));  //object
+// console.log(typeof(45 +"456"));  //string
+// console.log(typeof(45 + +"456"));  //number
+
+let n  = 55;
+switch (+n) {
+    case 55:
+        console.log("20 more");
+    break;
+    case 55:
+         console.log("30 more");
+    break;
+    case 10:
+        console.log("small");
+    default:
+        console.log("other value");
+    break;
+}
