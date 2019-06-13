@@ -38,3 +38,39 @@ switch (+n) {
         console.log("other value");
     break;
 }
+
+let arr= ["one", "two", "three"]; //keys
+for (let i in arr){
+    console.log(i);
+}
+
+let arr1= ["one", "two", "three"]; //values
+for (let ij of arr){
+    console.log(ij);
+}
+
+let str = arr1.join(", "); // join array to string
+console.log(str);
+
+let arrNumber = [2,1,45,16];
+
+let arrSort = arrNumber.sort(); //sorting as string
+console.log(arrSort);
+
+function compareNum(a, b){
+    return(a-b);
+}
+
+console.log(arrNumber.sort(compareNum));
+
+let soldier = {  //inheritance
+    health:100,
+    armor: 400
+};
+
+let john = {
+    health:300
+};
+john.__proto__ = soldier;
+console.log(john);
+console.log(john.armor);
