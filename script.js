@@ -91,8 +91,8 @@ var appDate = {
 };
 
 function printInfo(){
-    for (let key in appData) {
-        console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
+    for (let key in appDate) {
+        console.log("Наша программа включает в себя данные: " + key + " - " + appDate[key]);
     }
 }
 printInfo();
