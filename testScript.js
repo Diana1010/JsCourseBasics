@@ -1,9 +1,9 @@
 'use strict';
 
-let person ={
-    name: "John",
-    age: 25
-}
+// let person ={
+//     name: "John",
+//     age: 25
+// }
 
 // console.log(person["name"], person.name);
 // var years = prompt('Сколько вам лет?', 100);
@@ -75,7 +75,7 @@ let person ={
 // console.log(john);
 // console.log(john.armor);
 
-console.log( [ ] + false - null + true ); //output: nan\
+// console.log( [ ] + false - null + true ); //output: nan\
 //NaN - Not a number.
 
 // Пустой массив преобразуется в пустую строку.
@@ -137,3 +137,22 @@ console.log( [ ] + false - null + true ); //output: nan\
 //  console.log(typeof(+"Infinity") ); //number
 //  console.log(  "Ёжик" > "яблоко"); //false
 //  console.log(0 || "" || 2 || undefined || true || falsе);
+// let wrapper  = document.querySelector('.wrapper'), 
+// hearts = document.querySelectorAll('.heart');
+// console.log(wrapper);
+
+// let div  = document.createElement('div'),
+//     text = document.createTextNode('Here i am');
+
+// div.innerHTML = '<h1>Hello World!</h1>';
+
+// div.classList.add('black');
+// // document.body.appendChild(div);
+// document.body.insertBefore(div,wrapper);
+// wrapper.removeChild(hearts[1]);
+
+
+
+// wrapper.appendChild(div);
+
+// console.log(div);
