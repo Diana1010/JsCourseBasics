@@ -156,3 +156,45 @@
 // wrapper.appendChild(div);
 
 // console.log(div);
+
+
+let btn  = window.document.getElementsByTagName('button');
+let btn1 = window.document.getElementById('button');
+let btnAll = document.querySelectorAll('button');
+// console.log(btn);
+// btn[0].onclick = function(){    //второй перекрывает первый
+//   alert("You put a button");
+// };
+
+// btn[0].onclick = function(){
+//   alert("You put a button again");
+// };
+
+// btn[0].addEventListener('click', function(){   //покажутся оба
+//   alert("You put a button");
+// });
+
+// btn[0].addEventListener('click', function(){
+//   alert("You put a button again");
+// })
+
+
+//  всплытие события по иерархии - когда обработчик срабытывает сразу на самом вложенном элементе
+btn[0].addEventListener('click', function(event) {
+  //let target = event.target;
+  //target.style.display = 'none';
+  alert("Произошло событие " + event.type + " на элемент "+ event.target);
+});
+
+let wrapperB = document.querySelector('.wrapperButton');
+
+wrapperB.addEventListener('click', function(){
+  alert("Произошло событие " + event.type + " на элемент "+ event.target);
+});
+
+btnAll.forEach(function(item){
+  item.addEventListener('mouseleave', function(){
+    alert('Go out');
+  });
+});
+
