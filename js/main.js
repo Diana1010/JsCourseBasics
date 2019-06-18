@@ -43,16 +43,56 @@ startBtn.addEventListener('click', function(){
 });
 
 expensesBtn.addEventListener('click', function(){
-	for (let i = 0; i<2 ; i++){
-        let consumption = prompt("Введите обязательную статью расходов в этом месяце?"),
-         consumptionCost  = +prompt("Во сколько обойдётся?");
+    let sum = 0;
+	for (let i = 0; i< expensesItem.length ; i++){
+        let consumption = expensesItem[i].value,
+         consumptionCost  = expensesItem[++i].value;
          if (typeof(consumption)==='string' && (typeof(consumption) != null) && (typeof(consumptionCost) != null && consumption !="" && consumptionCost != "") ){
             appDate.expenses[consumption] = consumptionCost;
+            sum += +consumptionCost;
          }
          else {
              i--;
          }
         } 
+    expensesValue.textContent = sum;
+});
+
+optionalExpensesBtn.addEventListener('click', function(){
+    for (let i=0; i < optionalExpensesItem.length; i++){
+        let opt = optionalExpensesItem[i].value;
+        appDate.optionalExpenses = opt;
+        optionalExpensesValue.textContent += appDate.optionalExpenses[i] + ' ';
+    }
+});
+
+countBtn.addEventListener('click', function(){
+    function sum (object ){
+        var total = 0;
+        
+        for (var property in object) {
+            total += object[property];
+        }
+        return total;
+    };
+    appDate.moneyPerDay = ((appDate.budget - sum(appDate.expenses) + sum(appDate.income))/30).toFixed() ;
+    dayBudgetValue.textContent = appDate.moneyPerDay;
+
+    if (appDate.budget != undefined){
+
+        if (appDate.moneyPerDay < 100){
+            levelValue.textContent = "Min budget";
+        }else if( appDate.moneyPerDay < 500 && appDate.moneyPerDay > 100){
+            levelValue.textContent = "Fine budget";
+        }else if( appDate.moneyPerDay > 500){
+            levelValue.textContent = "Awesome budget";
+        }else {
+            levelValue.textContent = "Some error";
+        }
+    }else {
+        dayBudgetValue.textContent = "Some error";
+    }
+
 });
 
 var appDate = { 
@@ -67,27 +107,11 @@ var appDate = {
        
     },
     oneDayBudget: function() {
-        function sum (object ){
-            var total = 0;
-            
-            for (var property in object) {
-                total += object[property];
-            }
-            return total;
-        };
-        appDate.moneyPerDay = ((appDate.budget - sum(appDate.expenses) + sum(appDate.income))/30).toFixed() ;
+       
         alert("Бюджет на 1 день: " + appDate.moneyPerDay );
     },
     detectLevel: function() {
-        if (appDate.moneyPerDay < 100){
-            alert("Min budget");
-        }else if( appDate.moneyPerDay < 500 && appDate.moneyPerDay > 100){
-            alert("Fine budget");
-        }else if( appDate.moneyPerDay > 500){
-           alert("Awesome budget");
-        }else {
-        //    console.log("Some error");
-        }
+       
     },
     checkSavings: function(){
         if (appDate.savings == true){
@@ -98,10 +122,7 @@ var appDate = {
         }
     },
     chooseOptExpenses: function(){
-        for (let i=0; i <= 3; i++){
-            let opt = prompt("Статья необязательных расходов?", "");
-            appDate.optionalExpenses = opt;
-        }
+       
 
     },
     chooseIncome: function(){
