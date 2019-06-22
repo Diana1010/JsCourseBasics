@@ -62,7 +62,7 @@ optionalExpensesBtn.addEventListener('click', function(){
     for (let i=0; i < optionalExpensesItem.length; i++){
         let opt = optionalExpensesItem[i].value;
         appDate.optionalExpenses = opt;
-        optionalExpensesValue.textContent += appDate.optionalExpenses[i] + ' ';
+        optionalExpensesValue.textContent += opt + ' ';
     }
 });
 
@@ -93,6 +93,43 @@ countBtn.addEventListener('click', function(){
         dayBudgetValue.textContent = "Some error";
     }
 
+});
+
+incomeItem.addEventListener('input', function(){
+    let item = incomeItem.value;
+    appDate.income = item.split(", ");
+
+    incomeValue.textContent = appDate.income;
+});
+
+checkSavings.addEventListener('click',function(){
+    appDate.savings = !appDate.savings;
+});
+
+sumValue.addEventListener('input', function(){
+    if (appDate.savings){
+        let sum = +sumValue.value,
+            percent = +percentValue.value;
+
+        appDate.monthIncome = sum/100/12* percent;
+        appDate.yearIncome = sum/100 * percent;
+
+        monthSavingsValue.textContent = appDate.monthIncome.toFixed(1);
+        yearSavingsValue.textContent = appDate.yearIncome.toFixed(1);
+    }
+});
+
+percentValue.addEventListener('input', function(){
+    if (appDate.savings){
+        let sum = +sumValue.value,
+            percent = +percentValue.value;
+
+        appDate.monthIncome = sum/100/12* percent;
+        appDate.yearIncome = sum/100 * percent;
+
+        monthSavingsValue.textContent = appDate.monthIncome.toFixed(1);
+        yearSavingsValue.textContent = appDate.yearIncome.toFixed(1);
+    }
 });
 
 var appDate = { 
