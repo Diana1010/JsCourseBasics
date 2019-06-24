@@ -205,3 +205,74 @@
 //   });
 // });
 
+
+
+// КЛассы
+
+// function User( name, id){
+//   this.name = name;
+//   this.id = id;
+//   this.human = true;
+//   this.hello = function() {
+//     console.log('Hello '+ this.name);
+//   }
+// }
+
+// User.prototype.exit = function(name){
+//   console.log('User '+ this.name + ' exit');
+// }
+
+// let ivan = new User('Ivan', 45),
+//     petr = new User('Petr', 7);
+
+// console.log(ivan);
+
+// ivan.exit();
+ 
+
+
+
+class User {
+  constructor( name, id){
+    this.name = name;
+    this.id = id;
+    this.human = true;
+    
+  }
+  hello() {
+    console.log('Hello '+ this.name);
+  }
+  
+  exit() {
+    console.log('User '+ this.name + ' exit');
+  }
+}
+
+
+let ivan = new User('Ivan', 45),
+    petr = new User('Petr', 7);
+
+console.log(ivan);
+
+ivan.exit();
+
+// constructors
+
+// function BigAnimal() {
+
+//   this.name = "Мышь";
+
+//   return "Годзилла"; // <-- возвратим примитив
+// }
+
+// alert( new BigAnimal().name );
+
+
+// function BigAnimal() {
+
+//   this.name = "Мышь";
+
+//   return { name: "Годзилла" };  // <-- возвратим объект
+// }
+
+// alert( new BigAnimal().name );
