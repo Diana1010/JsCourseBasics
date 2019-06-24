@@ -205,6 +205,7 @@
 //   });
 // });
 
+<<<<<<< HEAD
 
 
 // КЛассы
@@ -276,3 +277,35 @@ ivan.exit();
 // }
 
 // alert( new BigAnimal().name );
+
+// Контекст вызова
+
+
+let user  = {
+  name : 'John'
+};
+
+function sayName(surname){
+  console.log(this);
+  console.log(this.name + surname);
+}
+
+console.log(sayName.call(user, 'Smith'));
+console.log(sayName.apply(user, ['Snow']));
+
+function count(number){
+   return this* number;
+}
+
+let double = count.bind(2);
+
+console.log(double(3));
+console.log(double(20));
+
+let button = document.querySelector('button');
+
+button.addEventListener('click', function(){
+  console.log(this); // button
+  this.style.background = 'red';
+})
+
