@@ -205,7 +205,7 @@
 //   });
 // });
 
-<<<<<<< HEAD
+
 
 
 // КЛассы
@@ -233,29 +233,29 @@
 
 
 
-class User {
-  constructor( name, id){
-    this.name = name;
-    this.id = id;
-    this.human = true;
+// class User {
+//   constructor( name, id){
+//     this.name = name;
+//     this.id = id;
+//     this.human = true;
     
-  }
-  hello() {
-    console.log('Hello '+ this.name);
-  }
+//   }
+//   hello() {
+//     console.log('Hello '+ this.name);
+//   }
   
-  exit() {
-    console.log('User '+ this.name + ' exit');
-  }
-}
+//   exit() {
+//     console.log('User '+ this.name + ' exit');
+//   }
+// }
 
 
-let ivan = new User('Ivan', 45),
-    petr = new User('Petr', 7);
+// let ivan = new User('Ivan', 45),
+//     petr = new User('Petr', 7);
 
-console.log(ivan);
+// console.log(ivan);
 
-ivan.exit();
+// ivan.exit();
 
 // constructors
 
@@ -285,27 +285,62 @@ let user  = {
   name : 'John'
 };
 
-function sayName(surname){
-  console.log(this);
-  console.log(this.name + surname);
-}
+// function sayName(surname){
+//   console.log(this);
+//   console.log(this.name + surname);
+// }
 
-console.log(sayName.call(user, 'Smith'));
-console.log(sayName.apply(user, ['Snow']));
+// console.log(sayName.call(user, 'Smith'));
+// console.log(sayName.apply(user, ['Snow']));
 
-function count(number){
-   return this* number;
-}
+// function count(number){
+//    return this* number;
+// }
 
-let double = count.bind(2);
+// let double = count.bind(2);
 
-console.log(double(3));
-console.log(double(20));
+// console.log(double(3));
+// console.log(double(20));
 
-let button = document.querySelector('button');
+// let button = document.querySelector('button');
 
-button.addEventListener('click', function(){
-  console.log(this); // button
-  this.style.background = 'red';
-})
+// button.addEventListener('click', function(){
+//   console.log(this); // button
+//   this.style.background = 'red';
+// });
+
+// JSON
+
+// console.log(JSON.parse(JSON.stringify(user)));
+
+// converter for usd
+
+let inputRub = document.getElementById('rub'),
+    inputUsd = document.getElementById('usd');
+inputRub.addEventListener('input', ()=> {
+  let request = new XMLHttpRequest();
+  //requst.open(method, url, asnc, login, pass);
+  request.open('GET', 'current.json');
+  request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  request.send();
+
+  //status
+  //statusText
+  //responseText
+  //readyStatus
+
+  request.addEventListener('readystatechange', function(){
+    if (request.readyState ===4 && request.status == 200){
+      let data = JSON.parse(request.response);
+
+      inputUsd.value = inputRub.value / data.usd;
+    }else {
+        inputUsd.value = "Something wrong";
+    }
+     
+  });
+
+
+});
+
 
