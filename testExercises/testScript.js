@@ -315,32 +315,51 @@ let user  = {
 
 // converter for usd
 
-let inputRub = document.getElementById('rub'),
-    inputUsd = document.getElementById('usd');
-inputRub.addEventListener('input', ()=> {
-  let request = new XMLHttpRequest();
-  //requst.open(method, url, asnc, login, pass);
-  request.open('GET', 'current.json');
-  request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-  request.send();
+// let inputRub = document.getElementById('rub'),
+//     inputUsd = document.getElementById('usd');
+// inputRub.addEventListener('input', ()=> {
+//   let request = new XMLHttpRequest();
+//   //requst.open(method, url, asnc, login, pass);
+//   request.open('GET', 'current.json');
+//   request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+//   request.send();
 
-  //status
-  //statusText
-  //responseText
-  //readyStatus
+//   //status
+//   //statusText
+//   //responseText
+//   //readyStatus
 
-  request.addEventListener('readystatechange', function(){
-    if (request.readyState ===4 && request.status == 200){
-      let data = JSON.parse(request.response);
+//   request.addEventListener('readystatechange', function(){
+//     if (request.readyState ===4 && request.status == 200){
+//       let data = JSON.parse(request.response);
 
-      inputUsd.value = inputRub.value / data.usd;
-    }else {
-        inputUsd.value = "Something wrong";
-    }
+//       inputUsd.value = inputRub.value / data.usd;
+//     }else {
+//         inputUsd.value = "Something wrong";
+//     }
      
+//   });
+
+
+// });
+
+//POlyfill
+if (document.documentElement.firstElementChild === undefined) { // (1)
+
+alert("Hello");
+  Object.defineProperty(Element.prototype, 'firstElementChild', { // (2)
+    get: function() {
+      var el = this.firstChild;
+      do {
+        if (el.nodeType === 1) {
+          return el;
+        }
+        el = el.nextSibling;
+      } while (el);
+
+      return null;
+    }
   });
-
-
-});
+}
 
 
