@@ -344,22 +344,104 @@ let user  = {
 // });
 
 //POlyfill
-if (document.documentElement.firstElementChild === undefined) { // (1)
+// if (document.documentElement.firstElementChild === undefined) { // (1)
 
-alert("Hello");
-  Object.defineProperty(Element.prototype, 'firstElementChild', { // (2)
-    get: function() {
-      var el = this.firstChild;
-      do {
-        if (el.nodeType === 1) {
-          return el;
-        }
-        el = el.nextSibling;
-      } while (el);
+// alert("Hello");
+//   Object.defineProperty(Element.prototype, 'firstElementChild', { // (2)
+//     get: function() {
+//       var el = this.firstChild;
+//       do {
+//         if (el.nodeType === 1) {
+//           return el;
+//         }
+//         el = el.nextSibling;
+//       } while (el);
 
-      return null;
-    }
-  });
+//       return null;
+//     }
+//   });
+// }
+
+
+//Promise
+
+// WIthout
+
+// let drink = 0;
+
+// function shoot(arrow, headshoot, fail){
+//     console.log("You make a shoot...");
+
+//     setTimeout(function(){
+//       Math.random() > .5  ? headshoot({}) : fail("You missed!");}
+//       ,3000
+//     );
+// };
+
+// function win(){
+//   console.log("you win!!!");
+//   (drink ==1) ? buyBear() : giveMoney();
+// }
+
+// function loose(){
+//   console.log("You loose(");
+// }
+
+// function buyBear(){
+//   console.log("Вам дали пиво");
+// }
+
+// function giveMoney(){
+//   console.log("Вам заплатили");
+// }
+
+// shoot({}, function(mark){
+//   console.log("YOu hit the mark");
+//   win(mark, buyBear, giveMoney);
+// },
+// function(miss){
+//   console.error(miss);
+//   loose();
+// }
+// )
+
+//With 
+let drink = 0;
+
+function shoot(arrow){
+    console.log("You make a shoot...");
+
+    let promise = new Promise(function(resolve, reject){
+      setTimeout(function(){
+        Math.random() > .5  ? resolve({}) : reject("You missed!");}
+        ,3000
+      );
+    });
+    return promise;
+    
+};
+
+function win(){
+  console.log("you win!!!");
+  (drink ==1) ? buyBear() : giveMoney();
 }
+
+function loose(){
+  console.log("You loose(");
+}
+
+function buyBear(){
+  console.log("Вам дали пиво");
+}
+
+function giveMoney(){
+  console.log("Вам заплатили");
+}
+
+shoot({})
+.then( mark=> console.log("We hitted the mark"))
+.then(win)
+.catch(loose);
+
 
 
