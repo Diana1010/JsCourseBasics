@@ -311,39 +311,59 @@ let user  = {
 
 // JSON
 
-// console.log(JSON.parse(JSON.stringify(user)));
+//console.log(JSON.parse(JSON.stringify(user)));
 
-// converter for usd
+//converter for usd
 
-// let inputRub = document.getElementById('rub'),
-//     inputUsd = document.getElementById('usd');
-// inputRub.addEventListener('input', ()=> {
-//   let request = new XMLHttpRequest();
-//   //requst.open(method, url, asnc, login, pass);
-//   request.open('GET', 'current.json');
-//   request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-//   request.send();
+let inputRub = document.getElementById('rub'),
+    inputUsd = document.getElementById('usd');
 
-//   //status
-//   //statusText
-//   //responseText
-//   //readyStatus
+inputRub.addEventListener('input', ()=> {
 
-//   request.addEventListener('readystatechange', function(){
-//     if (request.readyState ===4 && request.status == 200){
-//       let data = JSON.parse(request.response);
+  function catchData(){
+    return new Promise(function(resolve, reject){
+      let request = new XMLHttpRequest();
+      //requst.open(method, url, asnc, login, pass);
+      request.open('GET', 'current.json');
+      request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+      request.send();
+    
+      //status
+      //statusText
+      //responseText
+      //readyStatus
 
-//       inputUsd.value = inputRub.value / data.usd;
-//     }else {
-//         inputUsd.value = "Something wrong";
-//     }
-     
-//   });
+      request.onload =  function(){
+        if (request.readyState ===4 && request.status == 200){
+          resolve(this.response);
+        }else {
+            reject();
+        }
+         
+      };
+
+    });
+  };
+
+  catchData().
+      then(response => {
+        console.log(response);
+        let data = JSON.parse(response);
+        inputUsd.value = inputRub.value / data.usd;
+    })
+    .then(() => console.log(5000))
+    .catch(() => inputUsd.value = "Что-то пошло не так")
 
 
-// });
+});
 
-//POlyfill
+
+  
+
+
+
+
+// POlyfill
 // if (document.documentElement.firstElementChild === undefined) { // (1)
 
 // alert("Hello");
@@ -406,42 +426,42 @@ let user  = {
 // )
 
 //With 
-let drink = 0;
+// let drink = 0;
 
-function shoot(arrow){
-    console.log("You make a shoot...");
+// function shoot(arrow){
+//     console.log("You make a shoot...");
 
-    let promise = new Promise(function(resolve, reject){
-      setTimeout(function(){
-        Math.random() > .5  ? resolve({}) : reject("You missed!");}
-        ,3000
-      );
-    });
-    return promise;
+//     let promise = new Promise(function(resolve, reject){
+//       setTimeout(function(){
+//         Math.random() > .5  ? resolve({}) : reject("You missed!");}
+//         ,3000
+//       );
+//     });
+//     return promise;
     
-};
+// };
 
-function win(){
-  console.log("you win!!!");
-  (drink ==1) ? buyBear() : giveMoney();
-}
+// function win(){
+//   console.log("you win!!!");
+//   (drink ==1) ? buyBear() : giveMoney();
+// }
 
-function loose(){
-  console.log("You loose(");
-}
+// function loose(){
+//   console.log("You loose(");
+// }
 
-function buyBear(){
-  console.log("Вам дали пиво");
-}
+// function buyBear(){
+//   console.log("Вам дали пиво");
+// }
 
-function giveMoney(){
-  console.log("Вам заплатили");
-}
+// function giveMoney(){
+//   console.log("Вам заплатили");
+// }
 
-shoot({})
-.then( mark=> console.log("We hitted the mark"))
-.then(win)
-.catch(loose);
+// shoot({})
+// .then( mark=> console.log("We hitted the mark"))
+// .then(win)
+// .catch(loose);
 
 
 
