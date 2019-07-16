@@ -136,9 +136,9 @@ let message = {
 
     statusMessage.classList.add('status');
 
-    form.addEventListener('submit', function(event){
-        event.preventDefault();
-        form.appendChild(statusMessage);
+    // form.addEventListener('submit', function(event){
+    //     event.preventDefault();
+    //     form.appendChild(statusMessage);
 
         // не json
 
@@ -169,33 +169,84 @@ let message = {
 
     // json
 
-    let request = new XMLHttpRequest;
-    request.open('POST', 'server.php');
-    request.setRequestHeader('Content-Type', 'application/json');
+//     let request = new XMLHttpRequest;
+//     request.open('POST', 'server.php');
+//     request.setRequestHeader('Content-Type', 'application/json');
 
-    let formData = new FormData(form);
-    let obj ={};
+//     let formData = new FormData(form);
+//     let obj ={};
 
-    formData.forEach(function(value, key){ //turn formData into sth readable
-            obj[key] = value;
+//     formData.forEach(function(value, key){ //turn formData into sth readable
+//             obj[key] = value;
+//     });
+
+//     let json = JSON.stringify(obj);
+//     request.send(json);
+
+//     request.addEventListener('readystatechange', function(){
+//         if (request.readyState < 4){
+//             statusMessage.innerHTML = message.loading;
+//         }
+//         else if (request.readyState == 4 && request.status == 200  ){
+//             statusMessage.innerHTML = message.success;
+//         }
+//         else{
+//             statusMessage.innerHTML = message.failure;
+//         }
+//     });
+
+//     for (let i = 0; i< input.length; i++){
+//         input[i].value = '';
+//     }
+// }) 
+
+
+// Prmise with
+ form.addEventListener('submit', function(event){
+
+         event.preventDefault();
+         form.appendChild(statusMessage);
+
+function sendRequest() {
+    return new Promise(function(resolve, reject){
+
+        let request = new XMLHttpRequest;
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        let formData = new FormData(form);
+        let obj ={};
+
+        formData.forEach(function(value, key){ //turn formData into sth readable
+                obj[key] = value;
+        });
+
+        let json = JSON.stringify(obj);
+        request.send(json);
+
+        request.onload = function() {
+            if (request.readyState < 4){
+                resolve( message.loading);
+            }
+            else if (request.readyState == 4 && request.status == 200  ){
+                resolve(message.success);
+            }
+            else{
+                reject();
+                
+            }
+        };
     });
+};
 
-    let json = JSON.stringify(obj);
-    request.send(json);
+    sendRequest()
+        .then(response => {
+            statusMessage.innerHTML = response;
+        })
+        .catch(() => statusMessage.innerHTML = message.failure)
+        .then(() => { for (let i = 0; i< input.length; i++){
+            input[i].value = '';}
+        } );
 
-    request.addEventListener('readystatechange', function(){
-        if (request.readyState < 4){
-            statusMessage.innerHTML = message.loading;
-        }
-        else if (request.readyState == 4 && request.status == 200  ){
-            statusMessage.innerHTML = message.success;
-        }
-        else{
-            statusMessage.innerHTML = message.failure;
-        }
-    });
-
-    for (let i = 0; i< input.length; i++){
-        input[i].value = '';
-    }
-}) 
+    
+}) ;
