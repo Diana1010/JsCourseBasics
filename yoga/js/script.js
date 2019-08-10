@@ -316,4 +316,33 @@ let slideIndex = 1,
         daysSum = 0,
         total = 0;
 
+        totalValue.innerHTML = 0;
+        persons.addEventListener('change', function(){
+            personsSum  = +this.value;
+            total = (daysSum + personsSum) * 4000;
+            if (restDay.value == ''){
+                totalValue.innerHTML = 0;
+            }
+            else{
+                totalValue.innerHTML = total;
+            }
+        });
+        restDay.addEventListener('change', function(){
+            personsSum  = +this.value;
+            total = (daysSum + personsSum) * 4000;
+            if (persons.value == ''){
+                totalValue.innerHTML = 0;
+            }
+            else{
+                totalValue.innerHTML = total;
+            }
+        });
 
+        place.addEventListener('change', function(){
+            if (persons.value == '' || restDay.value == ''){
+                totalValue.innerHTML = 0;
+            }else{
+                let a = total;
+                totalValue.innerHTML = a* this.options[this.selectedIndex].value;
+            }
+        });
