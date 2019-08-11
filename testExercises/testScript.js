@@ -463,5 +463,8 @@ inputRub.addEventListener('input', ()=> {
 // .then(win)
 // .catch(loose);
 
+// LOCAL storage
 
-
+// localStorage.setItem("number", 1);
+// console.log(localStorage.getItem("number"));
+// localStorage.clear();

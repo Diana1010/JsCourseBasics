@@ -343,6 +343,6 @@ let slideIndex = 1,
                 totalValue.innerHTML = 0;
             }else{
                 let a = total;
-                totalValue.innerHTML = a* this.options[this.selectedIndex].value;
+                totalValue.innerHTML = a * this.options[this.selectedIndex].value;
             }
         });
