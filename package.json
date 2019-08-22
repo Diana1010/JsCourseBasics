@@ -19,5 +19,8 @@
   "devDependencies": {
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
   }
 }
